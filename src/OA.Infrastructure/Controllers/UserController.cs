@@ -1,10 +1,6 @@
-﻿using AutoMapper;
-using Domain.Model;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OA.Contracts;
 using OA.Service.Abstraction;
-using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
