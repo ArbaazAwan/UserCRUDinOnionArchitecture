@@ -47,7 +47,7 @@ namespace Services
             List<UserDto> usersDtos =new List<UserDto>();
             foreach (var user in users)
             {
-                usersDtos.Add(_mapper.Map<UserDto>(user));
+                usersDtos.Add(_mapper.Map<UserDto>(user)); //map and store in usersdto collecitons
             }
             return usersDtos;
         }
@@ -58,7 +58,7 @@ namespace Services
         public UserDto GetUserByID(int Id)
         {
             var user = _dbContext.Users.Where(a => a.Id == Id).FirstOrDefault();
-            var userdto = _mapper.Map<UserDto>(user);
+            var userdto = _mapper.Map<UserDto>(user); //mapping from user to userdto
             return userdto;
         }
         #endregion
@@ -98,7 +98,6 @@ namespace Services
                 }
                 else
                     return "User Doesn't Exists";
-
             }
             catch (Exception ex)
             {
