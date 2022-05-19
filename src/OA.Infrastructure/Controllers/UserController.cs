@@ -12,10 +12,10 @@ namespace UserCRUD_demo_Project_.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private IUserService _user;
-        public UserController(IUserService user )
+        private IUserService _userService;
+        public UserController(IUserService userService )
         {
-            _user = user;
+            _userService = userService;
         }
 
         //get all users
@@ -23,7 +23,7 @@ namespace UserCRUD_demo_Project_.Controllers
         [Route("getall")]
         public IActionResult GetAll()
         {
-            return Ok(_user.GetAllUsers());
+            return Ok(_userService.GetAllUsers());
         }
 
         //get one user
@@ -31,7 +31,10 @@ namespace UserCRUD_demo_Project_.Controllers
         [Route("get")]
         public IActionResult GetUser(int Id)
         {
-            return Ok(_user.GetUserByID(Id));
+            if (_userService.GetUserByID(Id) != null)
+                return Ok(_userService.GetUserByID(Id));
+            else
+                return NotFound("User doesn't exists!");
         }
 
         //add user
@@ -39,19 +42,19 @@ namespace UserCRUD_demo_Project_.Controllers
         public IActionResult AddUser(UserDto user)
         {
 
-            return Ok(_user.AddUser(user));
+            return Ok(_userService.AddUser(user));
         }
         //remove user
         [HttpDelete("{Id}")]
         public IActionResult RemoveUser(int Id)
         {
-            return Ok(_user.RemoveUser(Id));
+            return Ok(_userService.RemoveUser(Id));
         }
         //update user
         [HttpPut("update")]
         public IActionResult UpdateUser(UserDto user)
         {
-            return Ok( _user.UpdateUser(user));
+            return Ok( _userService.UpdateUser(user));
         }
 
     }

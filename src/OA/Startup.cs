@@ -36,19 +36,18 @@ namespace UserCRUD_demo_Project_
             services.AddScoped<IUserService, UserServices>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(typeof(Startup));
+
             var contact = new OpenApiContact()
             {
                 Name = "FirstName LastName",
                 Email = "user@example.com",
                 Url = new Uri("http://www.example.com")
             };
-
             var license = new OpenApiLicense()
             {
                 Name = "My License",
                 Url = new Uri("http://www.example.com")
             };
-
             var info = new OpenApiInfo()
             {
                 Version = "v1",
@@ -58,7 +57,6 @@ namespace UserCRUD_demo_Project_
                 Contact = contact,
                 License = license
             };
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", info);

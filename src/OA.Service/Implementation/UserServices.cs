@@ -3,7 +3,6 @@ using Domain.Model;
 using OA.Contracts;
 using OA.Domain.Repositories;
 using OA.Service.Abstraction;
-using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +13,15 @@ namespace Services
 {
     public sealed class UserServices : IUserService
     {
-        private AppDbContext _dbContext;
         private IMapper _mapper;
         private IUserRepository _userRepository;
-        public UserServices(IUserRepository userRepository,AppDbContext dbContext,IMapper mapper)
+        public UserServices(IUserRepository userRepository,IMapper mapper)
         {
-            _dbContext = dbContext;
             _mapper = mapper;
             _userRepository = userRepository;
           
         }
         #region ADD USER
-        //Add User
         public string AddUser(UserDto user)
         {
             try
@@ -44,7 +40,6 @@ namespace Services
         #endregion
 
         #region GET ALL USERS
-        //Get All Users
         public List<UserDto> GetAllUsers()
         {
             var users = _userRepository.GetAllUsers();
@@ -58,7 +53,6 @@ namespace Services
         #endregion
 
         #region GET USER BY ID
-        //Get user by ID
         public UserDto GetUserByID(int Id)
         {
             var user = _userRepository.GetUserById(Id);
@@ -76,7 +70,7 @@ namespace Services
                 //_dbContext.Remove(user);
                 //_dbContext.SaveChanges();
                 _userRepository.Remove(Id);
-                return "success";
+                return "User Removed Successfully!";
             }
             catch (Exception)
             {
@@ -86,19 +80,24 @@ namespace Services
         #endregion
 
         #region UPDATE USER
-        //update the user
         public string UpdateUser(UserDto userDto)
         {
             try
             {
                 var user = _mapper.Map<User>(userDto);
-                _userRepository.Update(user);
-                //userValue.UserName = user.UserName;
-                //userValue.UserEmail = user.UserEmail;
-                //userValue.UserPhone = user.UserPhone;
-                //userValue.UserAddress = user.UserAddress;
-                //_dbContext.SaveChanges();
-                return "Success";
+                if (user != null)
+                {
+                    _userRepository.Update(user);
+                    //userValue.UserName = user.UserName;
+                    //userValue.UserEmail = user.UserEmail;
+                    //userValue.UserPhone = user.UserPhone;
+                    //userValue.UserAddress = user.UserAddress;
+                    //_dbContext.SaveChanges();
+                    return "User has been Updated";
+                }
+                else
+                    return "Something went wrong or user doesn't exists!";
+                
             }
             catch (Exception ex)
             {

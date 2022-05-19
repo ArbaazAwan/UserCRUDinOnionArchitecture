@@ -16,32 +16,41 @@ namespace OA.Prensentation.Repositories
         {
             _dbContext = dbContext;
         }
+        #region     GET ALL USERS
         public List<User> GetAllUsers()
         {
             return _dbContext.Users.ToList();
         }
+        #endregion
 
+        #region GET USER BY ID
         public User GetUserById(int id)
         {
             return _dbContext.Users.Where(x => x.Id == id).FirstOrDefault();
         }
+        #endregion
 
+        #region INSERT USER
         public void Insert(User user)
         {
             _dbContext.Users.Add(user);
             _dbContext.SaveChanges();
         }
+        #endregion
 
+        #region REMOVE USER
         public void Remove(int id)
         {
            var user = _dbContext.Users.Where(x => x.Id == id).FirstOrDefault();
             _dbContext.Users.Remove(user);
         }
+        #endregion
 
+        #region UPDATE USER
         public void Update(User user)
         {
            var userValue = _dbContext.Users.Where(x=>x.Id == user.Id).FirstOrDefault();
-            if(user!=null)
+            if(userValue!=null)
             {
                 userValue.UserName = user.UserName;
                 userValue.UserEmail = user.UserEmail;
@@ -50,5 +59,6 @@ namespace OA.Prensentation.Repositories
                 _dbContext.SaveChanges();
             }
         }
+        #endregion
     }
 }
