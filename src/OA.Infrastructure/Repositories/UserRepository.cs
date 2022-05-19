@@ -43,6 +43,7 @@ namespace OA.Prensentation.Repositories
         {
            var user = _dbContext.Users.Where(x => x.Id == id).FirstOrDefault();
             _dbContext.Users.Remove(user);
+            _dbContext.SaveChanges();
         }
         #endregion
 

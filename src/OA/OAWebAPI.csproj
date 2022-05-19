@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OA.Infrastructure\OA.Prensentation.csproj" />
+    <ProjectReference Include="..\OA.Infrastructure\OA.Presentation.csproj" />
     <ProjectReference Include="..\OA.Persistence\OA.Persistence.csproj" />
   </ItemGroup>
 

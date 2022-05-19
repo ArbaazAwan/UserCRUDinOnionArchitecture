@@ -10,8 +10,8 @@ using Microsoft.OpenApi.Models;
 using OA.Domain.Repositories;
 using OA.Prensentation.Repositories;
 using OA.Service.Abstraction;
+using OA.Service.Implementation;
 using Repository;
-using Services;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,11 +31,13 @@ namespace UserCRUD_demo_Project_
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers()
+            .AddApplicationPart(typeof(OA.Prensentation.AssemblyReference).Assembly);
             services.AddDbContext<AppDbContext>(con=>con.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IUserService, UserServices>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRepositoryManager,RepositoryManager>();
+            services.AddScoped<IServiceManager, ServiceManager>();
             services.AddAutoMapper(typeof(Startup));
+            
 
             var contact = new OpenApiContact()
             {

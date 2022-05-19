@@ -12,10 +12,10 @@ namespace UserCRUD_demo_Project_.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private IUserService _userService;
-        public UserController(IUserService userService )
+        private IServiceManager _serviceManager;
+        public UserController(IServiceManager serviceManager)
         {
-            _userService = userService;
+            _serviceManager = serviceManager;
         }
 
         //get all users
@@ -23,7 +23,7 @@ namespace UserCRUD_demo_Project_.Controllers
         [Route("getall")]
         public IActionResult GetAll()
         {
-            return Ok(_userService.GetAllUsers());
+            return Ok(_serviceManager.UserService.GetAllUsers());
         }
 
         //get one user
@@ -31,8 +31,8 @@ namespace UserCRUD_demo_Project_.Controllers
         [Route("get")]
         public IActionResult GetUser(int Id)
         {
-            if (_userService.GetUserByID(Id) != null)
-                return Ok(_userService.GetUserByID(Id));
+            if (_serviceManager.UserService.GetUserByID(Id) != null)
+                return Ok(_serviceManager.UserService.GetUserByID(Id));
             else
                 return NotFound("User doesn't exists!");
         }
@@ -42,19 +42,20 @@ namespace UserCRUD_demo_Project_.Controllers
         public IActionResult AddUser(UserDto user)
         {
 
-            return Ok(_userService.AddUser(user));
+            return Ok(_serviceManager.UserService.AddUser(user));
         }
         //remove user
         [HttpDelete("{Id}")]
         public IActionResult RemoveUser(int Id)
         {
-            return Ok(_userService.RemoveUser(Id));
+            return Ok(_serviceManager.UserService.RemoveUser(Id));
         }
         //update user
         [HttpPut("update")]
         public IActionResult UpdateUser(UserDto user)
         {
-            return Ok( _userService.UpdateUser(user));
+
+            return Ok( _serviceManager.UserService.UpdateUser(user));
         }
 
     }

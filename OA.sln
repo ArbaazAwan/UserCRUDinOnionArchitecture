@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OAWebAPI", "src\OA\OAWebAPI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OA.Domain", "src\OA.Domain\OA.Domain.csproj", "{74D8BF98-D40C-447E-BB40-29B1BAA363AB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OA.Prensentation", "src\OA.Infrastructure\OA.Prensentation.csproj", "{97A14F11-44A9-443C-ADC4-CF5696BC64F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OA.Presentation", "src\OA.Infrastructure\OA.Presentation.csproj", "{97A14F11-44A9-443C-ADC4-CF5696BC64F7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OA.Persistence", "src\OA.Persistence\OA.Persistence.csproj", "{5F6B0320-95CE-4D4C-82D6-7A0972243716}"
 EndProject
@@ -17,9 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{DDB46C75-8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{C1FE7E4B-D27A-4AA7-9B41-4BE8877407E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OA.Contracts", "Contracts\OA.Contracts.csproj", "{66B8A7D9-4C4B-453E-80EC-383E9F1444A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OA.Contracts", "Contracts\OA.Contracts.csproj", "{66B8A7D9-4C4B-453E-80EC-383E9F1444A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OA.Service.Abstraction", "OA.Service.Abstraction\OA.Service.Abstraction.csproj", "{53FE6222-513D-4384-86F2-9B54315BEF4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OA.Service.Abstraction", "OA.Service.Abstraction\OA.Service.Abstraction.csproj", "{53FE6222-513D-4384-86F2-9B54315BEF4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
