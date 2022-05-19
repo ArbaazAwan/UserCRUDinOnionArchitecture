@@ -20,6 +20,5 @@ namespace OA.Service.Abstraction
         public string RemoveUser(int Id);
         //update the user
         public string UpdateUser(UserDto user);
-
     }
 }

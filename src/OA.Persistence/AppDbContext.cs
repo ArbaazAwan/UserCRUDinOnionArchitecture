@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class AppDbContext:DbContext
+    public sealed class AppDbContext:DbContext
     {
         public AppDbContext(DbContextOptions con):base(con)//passing the connection string
         {

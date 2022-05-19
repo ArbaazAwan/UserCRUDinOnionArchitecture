@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Model;
 using OA.Contracts;
+using OA.Domain.Repositories;
 using OA.Service.Abstraction;
 using Repository;
 using System;
@@ -11,14 +12,16 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class UserServices : IUserService
+    public sealed class UserServices : IUserService
     {
         private AppDbContext _dbContext;
         private IMapper _mapper;
-        public UserServices(AppDbContext dbContext,IMapper mapper)
+        private IUserRepository _userRepository;
+        public UserServices(IUserRepository userRepository,AppDbContext dbContext,IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _userRepository = userRepository;
           
         }
         #region ADD USER
@@ -28,8 +31,9 @@ namespace Services
             try
             {
                 var mappedUser =_mapper.Map<User>(user);
-                _dbContext.Users.Add(mappedUser);
-                _dbContext.SaveChanges();
+                //_dbContext.Users.Add(mappedUser);
+                //_dbContext.SaveChanges();
+                _userRepository.Insert(mappedUser);
                 return "Success";
             }
             catch (Exception)
@@ -43,8 +47,8 @@ namespace Services
         //Get All Users
         public List<UserDto> GetAllUsers()
         {
-            var users = _dbContext.Users.ToList();
-            List<UserDto> usersDtos =new List<UserDto>();
+            var users = _userRepository.GetAllUsers();
+            var usersDtos =new List<UserDto>();
             foreach (var user in users)
             {
                 usersDtos.Add(_mapper.Map<UserDto>(user)); //map and store in usersdto collecitons
@@ -57,7 +61,7 @@ namespace Services
         //Get user by ID
         public UserDto GetUserByID(int Id)
         {
-            var user = _dbContext.Users.Where(a => a.Id == Id).FirstOrDefault();
+            var user = _userRepository.GetUserById(Id);
             var userdto = _mapper.Map<UserDto>(user); //mapping from user to userdto
             return userdto;
         }
@@ -68,9 +72,10 @@ namespace Services
         {
             try
             {
-                var user = _dbContext.Users.Where(x=>x.Id==Id).FirstOrDefault();
-                _dbContext.Remove(user);
-                _dbContext.SaveChanges();
+                //var user = _dbContext.Users.Where(x=>x.Id==Id).FirstOrDefault();
+                //_dbContext.Remove(user);
+                //_dbContext.SaveChanges();
+                _userRepository.Remove(Id);
                 return "success";
             }
             catch (Exception)
@@ -82,22 +87,18 @@ namespace Services
 
         #region UPDATE USER
         //update the user
-        public string UpdateUser(UserDto user)
+        public string UpdateUser(UserDto userDto)
         {
             try
             {
-                var userValue = _dbContext.Users.Where(x => x.Id == user.Id).FirstOrDefault();
-                if (userValue != null)
-                {
-                    userValue.UserName = user.UserName;
-                    userValue.UserEmail = user.UserEmail;
-                    userValue.UserPhone = user.UserPhone;
-                    userValue.UserAddress = user.UserAddress;
-                    _dbContext.SaveChanges();
-                    return "Success";
-                }
-                else
-                    return "User Doesn't Exists";
+                var user = _mapper.Map<User>(userDto);
+                _userRepository.Update(user);
+                //userValue.UserName = user.UserName;
+                //userValue.UserEmail = user.UserEmail;
+                //userValue.UserPhone = user.UserPhone;
+                //userValue.UserAddress = user.UserAddress;
+                //_dbContext.SaveChanges();
+                return "Success";
             }
             catch (Exception ex)
             {

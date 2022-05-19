@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using OA.Domain.Repositories;
+using OA.Prensentation.Repositories;
 using OA.Service.Abstraction;
 using Repository;
 using Services;
@@ -32,6 +34,7 @@ namespace UserCRUD_demo_Project_
             services.AddControllers();
             services.AddDbContext<AppDbContext>(con=>con.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IUserService, UserServices>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(typeof(Startup));
             var contact = new OpenApiContact()
             {
