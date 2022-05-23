@@ -13,9 +13,11 @@ namespace OA.Service.Abstraction
         //Add User
         public string AddUser(UserDto user);
         //Get All Users
-        public List<UserDto> GetAllUsers();
+        public List<DisplayUserDto> GetAllUsers();
         //Get user by ID
-        public UserDto GetUserByID(int Id);
+        public DisplayUserDto GetUserByID(int Id);
+        //get user by username and password
+        public User GetByUsernameAndPassword(string username, string password);
         //remove User
         public string RemoveUser(int Id);
         //update the user

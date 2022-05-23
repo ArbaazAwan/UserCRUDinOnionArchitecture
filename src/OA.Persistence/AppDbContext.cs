@@ -12,10 +12,16 @@ namespace Repository
     {
         public AppDbContext(DbContextOptions con):base(con)//passing the connection string
         {
-        
+            
         }
         public DbSet<User> Users { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.UserName)
+                .IsUnique();
+        }
     }
 }

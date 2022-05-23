@@ -3,21 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Model
+namespace OA.Contracts
 {
-    public class User
+    public class DisplayUserDto //created this to hide the password in the get and get all methods
     {
-        [Key]
         public int Id { get; set; }
         public string UserRole { get; set; }
         public string UserName { get; set; }
-        public string  UserPassword { get; set; }
         public string UserEmail { get; set; }
         public string UserPhone { get; set; }
         public string UserAddress { get; set; }
-        public int UserSalary { get; set; }
-            
     }
 }

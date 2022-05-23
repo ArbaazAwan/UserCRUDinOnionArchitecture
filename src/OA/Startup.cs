@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +38,8 @@ namespace UserCRUD_demo_Project_
             services.AddScoped<IRepositoryManager,RepositoryManager>();
             services.AddScoped<IServiceManager, ServiceManager>();
             services.AddAutoMapper(typeof(Startup));
-            
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
 
             var contact = new OpenApiContact()
             {
@@ -74,7 +76,7 @@ namespace UserCRUD_demo_Project_
             }
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSwagger();
             app.UseSwaggerUI(c =>

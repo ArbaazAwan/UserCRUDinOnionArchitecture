@@ -13,6 +13,8 @@ namespace OA.Domain.Repositories
         public List<User> GetAllUsers();
         //get by id
         public User GetUserById(int id);
+        //get by username and password
+        public User GetByUsernameAndPassword(string username, string password);
         //add
         public void Insert(User user);
         //remove

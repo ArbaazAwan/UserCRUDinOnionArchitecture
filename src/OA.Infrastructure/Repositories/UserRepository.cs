@@ -16,6 +16,7 @@ namespace OA.Prensentation.Repositories
         {
             _dbContext = dbContext;
         }
+
         #region     GET ALL USERS
         public List<User> GetAllUsers()
         {
@@ -27,6 +28,12 @@ namespace OA.Prensentation.Repositories
         public User GetUserById(int id)
         {
             return _dbContext.Users.Where(x => x.Id == id).FirstOrDefault();
+        }
+        #endregion
+        #region   GET BY USERNAME AND PASSWORD
+        public User GetByUsernameAndPassword(string username,string password)
+        {
+            return _dbContext.Users.Where(x => x.UserName == username && x.UserPassword == password).FirstOrDefault();
         }
         #endregion
 

@@ -5,9 +5,6 @@ using OA.Domain.Repositories;
 using OA.Service.Abstraction;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OA.Service.Implementation
 {
@@ -15,7 +12,7 @@ namespace OA.Service.Implementation
     {
         private IRepositoryManager _repositoryManager;
         public UserServices(IRepositoryManager repositoryManager)
-        {
+        {   
             _repositoryManager = repositoryManager;
 
         }
@@ -38,17 +35,17 @@ namespace OA.Service.Implementation
         #endregion
 
         #region GET ALL USERS
-        public List<UserDto> GetAllUsers()
+        public List<DisplayUserDto> GetAllUsers()
         {
             try
             {
                 var users = _repositoryManager.userRepository.GetAllUsers();
-                var usersDtos = new List<UserDto>();
+                var usersDtos = new List<DisplayUserDto>();
 
                 foreach (var user in users)
                 {
                     if (user != null)
-                        usersDtos.Add(user.Adapt<UserDto>()); //map and store in usersdto collecitons
+                        usersDtos.Add(user.Adapt<DisplayUserDto>()); //map and store in usersdto collecitons
                 }
                 return usersDtos;
             }
@@ -62,11 +59,19 @@ namespace OA.Service.Implementation
         #endregion
 
         #region GET USER BY ID
-        public UserDto GetUserByID(int Id)
+        public DisplayUserDto GetUserByID(int Id)
         {
             var user = _repositoryManager.userRepository.GetUserById(Id);
-            var userdto = user.Adapt<UserDto>(); //mapping from user to userdto
+            var userdto = user.Adapt<DisplayUserDto>(); //mapping from user to userdto
             return userdto;
+        }
+        #endregion
+        
+        #region GET BY USERNAME AND PASSWORD
+        public User GetByUsernameAndPassword(string username, string password)
+        {
+            var user = _repositoryManager.userRepository.GetByUsernameAndPassword(username, password);
+            return user;
         }
         #endregion
 
