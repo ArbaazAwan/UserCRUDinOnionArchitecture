@@ -18,7 +18,6 @@ namespace UserCRUD_demo_Project_.Controllers
             _serviceManager = serviceManager;
         }
 
-
         //get all users
         [HttpGet]
         [Route("getall")]
@@ -50,25 +49,28 @@ namespace UserCRUD_demo_Project_.Controllers
         [HttpPost("add")]
         public IActionResult AddUser(UserDto user)
         {
-            if (!User.Identity.IsAuthenticated)
-                return Unauthorized("You are not Authorized to add a user!");
-            return Ok(_serviceManager.UserService.AddUser(user));
+            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                return Ok(_serviceManager.UserService.AddUser(user));
+            return Unauthorized("You are not Authorized to add a user!");
+            
         }
         //remove user
         [HttpDelete("{Id}")]
         public IActionResult RemoveUser(int Id)
         {
-            if (!User.Identity.IsAuthenticated)
-                return Unauthorized("You are not Authorized to remove a user!");
-            return Ok(_serviceManager.UserService.RemoveUser(Id));
+            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                return Ok(_serviceManager.UserService.RemoveUser(Id));
+            return Unauthorized("You are not Authorized to remove a user!");
+            
         }
         //update user
         [HttpPut("update")]
         public IActionResult UpdateUser(UserDto user)
         {
-            if (!User.Identity.IsAuthenticated)
-                return Unauthorized("You are not Authorized to update a user!");
-            return Ok( _serviceManager.UserService.UpdateUser(user));
+            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                return Ok( _serviceManager.UserService.UpdateUser(user));
+            return Unauthorized("You are not Authorized to update a user!");
+            
         }
 
     }

@@ -37,10 +37,18 @@ namespace UserCRUD_demo_Project_
             services.AddDbContext<AppDbContext>(con=>con.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IRepositoryManager,RepositoryManager>();
             services.AddScoped<IServiceManager, ServiceManager>();
-            services.AddAutoMapper(typeof(Startup));
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie();
-
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
+            });
             var contact = new OpenApiContact()
             {
                 Name = "FirstName LastName",
@@ -78,6 +86,7 @@ namespace UserCRUD_demo_Project_
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseCors();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
