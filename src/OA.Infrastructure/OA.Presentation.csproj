@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OA.Persistence\OA.Persistence.csproj" />
     <ProjectReference Include="..\OA.Service\OA.Service.csproj" />
   </ItemGroup>
 

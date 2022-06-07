@@ -23,10 +23,9 @@ namespace UserCRUD_demo_Project_.Controllers
         [Route("getall")]
         public IActionResult GetAll()
         {
-            if (User.Identity.IsAuthenticated)
+            //if (User.Identity.IsAuthenticated)
                 return Ok(_serviceManager.UserService.GetAllUsers());
-            else
-                return Unauthorized("you are not Authorized!:Please Login");
+            //return Unauthorized("you are not Authorized!:Please Login");
         }
 
         //get one user

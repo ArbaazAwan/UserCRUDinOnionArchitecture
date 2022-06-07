@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OA.Prensentation.Repositories
+namespace OA.Persistence.Repositories
 {
     public class RepositoryManager : IRepositoryManager
     {

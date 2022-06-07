@@ -43,7 +43,6 @@ namespace UserCRUD_demo_Project_.Controllers
             }
             else
                 return Unauthorized("invalid username or password!");
-
         }
 
         //logout user

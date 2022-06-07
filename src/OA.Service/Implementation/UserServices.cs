@@ -14,7 +14,6 @@ namespace OA.Service.Implementation
         public UserServices(IRepositoryManager repositoryManager)
         {   
             _repositoryManager = repositoryManager;
-
         }
         #region ADD USER
         public string AddUser(UserDto user)
@@ -53,8 +52,6 @@ namespace OA.Service.Implementation
             {
                 throw;
             }
-            
-
         }
         #endregion
 
